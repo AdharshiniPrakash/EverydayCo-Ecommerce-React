@@ -1,10 +1,16 @@
-import cartList from "./cartList";
+import CartList from "./CartList";
 
-function Popup(showPopUp, closePopUp, cartItems) {
+function Popup({showPopUp, closePopUp, cartItems}) {
 
-    console.log(cartItems)
+    let cartTotal = 0;
 
-    const className = `popup-overlay ${showPopUp === true ? 'show-popup':''}`;
+    cartItems.forEach(element => {
+        let itemTotal = 0;
+        itemTotal += (element.price * element.quantity);
+        cartTotal += itemTotal;
+    });
+
+    const className = `popup-overlay ${showPopUp === true ? 'show-popup' : ''}`;
 
     return (
         <div className={className}>
@@ -17,9 +23,15 @@ function Popup(showPopUp, closePopUp, cartItems) {
                     {
                         cartItems.map((product) => {
                             product.quantity = 1;
-                            return <cartList product={product}></cartList>
+                            return (
+                                <CartList product={product} key={product.id}></CartList>
+                            );
                         })
                     }
+                    <div className="cart-total">
+                        <div>Total</div>
+                        <div>₹{cartTotal}</div>
+                    </div>
                 </div>
             </div>
         </div>

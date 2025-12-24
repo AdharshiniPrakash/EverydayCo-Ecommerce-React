@@ -37,7 +37,7 @@ function App() {
   }, []);
 
   const addCartItem = (product) => {
-    setCartItems((prev) => [...prev, product]);
+    setCartItems([...cartItems, product]);
   };
 
   const removeCartItem = (product) => {
@@ -53,7 +53,10 @@ function App() {
           <CategorySection key={index} catKey={cat.category} title={cat.category} products={cat.items} addToCart={addCartItem} removeFromCart={removeCartItem} />
         ))}
       </main>
-      <Popup showPopUp={showPopUp} closePopUp={togglePopup} cartItems={cartItems} ></Popup>
+      {
+        cartItems.length > 0 &&
+        <Popup showPopUp={showPopUp} closePopUp={togglePopup} cartItems={cartItems} ></Popup>
+      }
     </div>
   );
 }

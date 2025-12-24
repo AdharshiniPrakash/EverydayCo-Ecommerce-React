@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import close from './assets/close.svg';
 
-function cartList(product) {
+function CartList({product}) {
     const [quantity, setQuantity] = useState(product.quantity);
 
   return (
     <div className="cart-item" key={product.id}>
-      <div className="item-remove">X</div>
+      <div className="item-remove"><img src={close} /></div>
 
       <div className="item-details">
         <img src={product.image} alt={product.title} className="item-image" />
@@ -33,4 +34,4 @@ function cartList(product) {
   );
 }
 
-export default cartList;
+export default CartList;
